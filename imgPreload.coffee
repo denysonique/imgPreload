@@ -76,7 +76,8 @@
             $image = $(image)
             no_ = $image.attr 'no'
             placeholder_stack[no_].replaceWith($image)
-            spinner_stack[no_].fadeOut(settings.animation_duration / 2)
+            spinner_stack[no_].fadeOut(settings.animation_duration / 2, -> $(@).remove())
+            console.log 'foox'
             
             $image.fadeOut(0).fadeIn settings.animation_duration
     
