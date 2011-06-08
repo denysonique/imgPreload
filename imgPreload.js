@@ -82,7 +82,7 @@
           src: src
         });
       }
-      return replace = function(image) {
+      replace = function(image) {
         var $image, no_;
         $image = $(image);
         no_ = $image.attr('no');
@@ -90,9 +90,9 @@
         spinner_stack[no_].fadeOut(settings.animation_duration / 2, function() {
           return $(this).remove();
         });
-        console.log('foox');
         return $image.fadeOut(0).fadeIn(settings.animation_duration);
       };
+      return this;
     };
   })(jQuery);
 }).call(this);
