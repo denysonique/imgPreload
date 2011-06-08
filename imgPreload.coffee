@@ -4,6 +4,7 @@
         settings =
             delay: 2000
             animation_duration: 1000
+            spinner_src: 'spinner.gif'
 
         $.extend(settings, options) if options
 
@@ -23,14 +24,16 @@
             
         @each ->
             $image = $(this)
+            #we need to save the offset, as after replaceWith() something weird happens
+            #when a page is using some particular layouts
+            offset_top = $image.offset().top
+            offset_left = $image.offset().left
+
             $spinner_img = $('<img>')#.attr src: 'loader.gif'
             $placeholder = $('<img>').attr src: 'data:image/gif;base64,R0lGODlhAQABA
                 IABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
             $placeholder.attr width: $image.attr('width')
             $placeholder.attr height: $image.attr('height')
-
-
-
 
 
 
@@ -43,20 +46,20 @@
             $spinner_img.css position: 'absolute'
             $spinner_img.css 'z-index', 9999
             $spinner_img.load -> #place the spinner at the centre of the preloaded image
-                $(this).css left: ($placeholder.offset().left +
+
+                $(this).css left: (offset_left +
                     $placeholder.width() / 2) - $(this).width() / 2
-                $(this).css top: ($placeholder.offset().top +
-                    $placeholder.height() / 2) - $(this).height() / 2 
-            $spinner_img.attr src: 'loader.gif'
+                $(this).css top: (offset_top +
+                    $placeholder.height() / 2) - $(this).height() / 2
+            $spinner_img.attr src: settings.spinner_src
 
 
         i = 0
-        #$('body').append image_stack
         for x in image_stack
             x.attr no: i++
 
             src = x.attr 'src'
-            x.attr src: null #win need to unload the images, IE...
+            x.attr src: '' #win need to unload the images, IE...
             
             x.load ->
                 if window.delay_completed

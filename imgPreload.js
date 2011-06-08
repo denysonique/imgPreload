@@ -4,7 +4,8 @@
       var delay_completion, i, image_stack, placeholder_stack, replace, settings, spinner_stack, src, x, _i, _len;
       settings = {
         delay: 2000,
-        animation_duration: 1000
+        animation_duration: 1000,
+        spinner_src: 'spinner.gif'
       };
       if (options) {
         $.extend(settings, options);
@@ -25,8 +26,10 @@
       };
       setTimeout(delay_completion, settings.delay);
       this.each(function() {
-        var $image, $placeholder, $spinner_img;
+        var $image, $placeholder, $spinner_img, offset_left, offset_top;
         $image = $(this);
+        offset_top = $image.offset().top;
+        offset_left = $image.offset().left;
         $spinner_img = $('<img>');
         $placeholder = $('<img>').attr({
           src: 'data:image/gif;base64,R0lGODlhAQABA\
@@ -48,14 +51,14 @@
         $spinner_img.css('z-index', 9999);
         $spinner_img.load(function() {
           $(this).css({
-            left: ($placeholder.offset().left + $placeholder.width() / 2) - $(this).width() / 2
+            left: (offset_left + $placeholder.width() / 2) - $(this).width() / 2
           });
           return $(this).css({
-            top: ($placeholder.offset().top + $placeholder.height() / 2) - $(this).height() / 2
+            top: (offset_top + $placeholder.height() / 2) - $(this).height() / 2
           });
         });
         return $spinner_img.attr({
-          src: 'loader.gif'
+          src: settings.spinner_src
         });
       });
       i = 0;
@@ -66,7 +69,7 @@
         });
         src = x.attr('src');
         x.attr({
-          src: null
+          src: ''
         });
         x.load(function() {
           if (window.delay_completed) {
