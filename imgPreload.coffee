@@ -16,9 +16,9 @@
         delay_completion = ->
             window.delay_completed = true
             for x in image_stack
-                if $(x).attr('load-after-delay') is 'true'
+                if $(x).attr('data-load-after-delay') is 'true'
                     replace x
-                    $(x).removeAttr('load-after-delay')
+                    $(x).removeAttr('data-load-after-delay')
 
         setTimeout delay_completion, settings.fake_delay
             
@@ -66,7 +66,7 @@
                     replace this
                     
                 else
-                    $(@).attr 'load-after-delay', true
+                    $(@).attr 'data-load-after-delay', true
 
             x.attr src: src #put the src back
 

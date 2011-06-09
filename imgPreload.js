@@ -20,7 +20,7 @@
         _results = [];
         for (_i = 0, _len = image_stack.length; _i < _len; _i++) {
           x = image_stack[_i];
-          _results.push($(x).attr('load-after-delay') === 'true' ? (replace(x), $(x).removeAttr('load-after-delay')) : void 0);
+          _results.push($(x).attr('data-load-after-delay') === 'true' ? (replace(x), $(x).removeAttr('data-load-after-delay')) : void 0);
         }
         return _results;
       };
@@ -75,7 +75,7 @@
           if (window.delay_completed) {
             return replace(this);
           } else {
-            return $(this).attr('load-after-delay', true);
+            return $(this).attr('data-load-after-delay', true);
           }
         });
         x.attr({
