@@ -20,7 +20,7 @@
         _results = [];
         for (_i = 0, _len = image_stack.length; _i < _len; _i++) {
           x = image_stack[_i];
-          _results.push($(x).attr('load-after-delay') === 'true' ? (replace(x), $(x).attr('load-after-delay', false)) : void 0);
+          _results.push($(x).attr('load-after-delay') === 'true' ? (replace(x), $(x).removeAttr('load-after-delay')) : void 0);
         }
         return _results;
       };

@@ -18,7 +18,7 @@
             for x in image_stack
                 if $(x).attr('load-after-delay') is 'true'
                     replace x
-                    $(x).attr('load-after-delay', false)
+                    $(x).removeAttr('load-after-delay')
 
         setTimeout delay_completion, settings.fake_delay
             
