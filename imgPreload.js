@@ -3,7 +3,7 @@
     return $.fn.imgPreload = function(options) {
       var delay_completion, i, image_stack, placeholder_stack, replace, settings, spinner_stack, src, x, _i, _len;
       settings = {
-        delay: 2000,
+        fake_delay: 2000,
         animation_duration: 1000,
         spinner_src: 'spinner.gif'
       };
@@ -24,7 +24,7 @@
         }
         return _results;
       };
-      setTimeout(delay_completion, settings.delay);
+      setTimeout(delay_completion, settings.fake_delay);
       this.each(function() {
         var $image, $placeholder, $spinner_img, offset_left, offset_top;
         $image = $(this);

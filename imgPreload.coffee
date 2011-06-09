@@ -2,7 +2,7 @@
     $.fn.imgPreload = (options)->
         
         settings =
-            delay: 2000
+            fake_delay: 2000
             animation_duration: 1000
             spinner_src: 'spinner.gif'
 
@@ -20,7 +20,7 @@
                     replace x
                     $(x).attr('load-after-delay', false)
 
-        setTimeout delay_completion, settings.delay
+        setTimeout delay_completion, settings.fake_delay
             
         @each ->
             $image = $(this)
