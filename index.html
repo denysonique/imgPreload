@@ -14,8 +14,21 @@
     }
     #container {
       margin: 0 auto;
-      width: 800px;
+      width: 1000px;
     }
+
+    #photos img {
+        box-shadow: black 1px 1px 7px;
+        margin: 4px;
+    }
+
+    input[type='submit'] {
+        font-size: 16px;
+        width: 100%;
+    }
+
+
+
     h1 { font-size: 3.8em; color: #0443cc; margin-bottom: 3px; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
@@ -28,6 +41,15 @@
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
+  <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'>
+  </script>
+  <script type='text/javascript' src='imgPreload.js'>
+  </script>
+  <script type='text/javascript'>
+    $(function() {
+        $("#photos img").imgPreload({fake_delay:10})
+    })
+  </script>
 </head>
 
 <body>
@@ -42,17 +64,101 @@
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="http://github.com/denysonique/imgPreload">jQuery imgPreload</a>
-      <span class="small">by <a href="http://github.com/denysonique">denysonique</a></span></h1>
+    <h1>
+        <a href="http://github.com/denysonique/imgPreload">jQuery imgPreload</a>
+    </h1>
 
     <div class="description">
-      jQuery plugin for preloading images (with a spinner)
+      jQuery plugin for preloading images (with a spinner)<br/>
+      Written in CoffeeScript
     </div>
+    <h2>Demo</h2>
+    <div id='photos'>
+        <a href="http://www.flickr.com/photos/americanadian_8/5802366200/" title="Day One Hundred Fifty-Six [Explore] by americanadian_8, on Flickr"><img src="http://farm3.static.flickr.com/2595/5802366200_122e4810f6_m.jpg" width="240" height="160" alt="Day One Hundred Fifty-Six [Explore]"></a>
+        <a href="http://www.flickr.com/photos/dyahniar/5795532839/" title="low tide at Echo Beach by Ikniro Violet, on Flickr"><img src="http://farm6.static.flickr.com/5079/5795532839_767af81090_m.jpg" width="240" height="160" alt="low tide at Echo Beach"></a>
+        <a href="http://www.flickr.com/photos/43676152@N02/5427531542/" title="lamborghini_reventon by wish_master_7, on Flickr"><img src="http://farm6.static.flickr.com/5054/5427531542_3beac5a735_m.jpg" width="231" height="160" alt="lamborghini_reventon"></a>
 
-    <p>main text</p><h2>Install</h2>
-<p>instructions</p>
-<h2>License</h2>
-<p>LGPL</p>
+        <a href="http://www.flickr.com/photos/28960236@N04/3202272106/" title="Ruby Logo by lpdahito, on Flickr"><img src="http://farm4.static.flickr.com/3419/3202272106_86e6c38fc8_m.jpg"  width="160" height="160" alt="Ruby Logo"></a>
+    </div>
+    <script>
+        function demo() {
+            $images = $("#photos img")
+            if($("#disableCache").attr("checked")) {
+                timestamp = new Date().getTime()
+                $images.each(function(){
+                    $this = $(this)
+                    not_cached_src = $this.attr('src')+'?'+timestamp
+                    $this.attr('src', not_cached_src)
+                })
+            }
+
+            $images.imgPreload({
+                fake_delay: $("#fake_delay").val(),
+                animation_duration: $("#animation_duration").val()
+            })
+        }
+    </script>
+            
+    <p>
+    <form>
+    <table>
+    <tr>
+        <td>
+            <label for='delay'>fake_delay:</label>
+        </td>
+        <td>
+            <input type='text' id='fake_delay' value='10'/>ms
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for='animation_duration'>animation_duration:</label>
+        </td>
+        <td>
+            <input type='text' id='animation_duration' value='1000'/>ms
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type='checkbox' id='disableCache' checked='checked'/>
+            <label for='disableCache'> Disable browser cache </label>
+        </td>
+        <td>
+            <input type='submit' value='imgPreload()' onclick='demo(); return false'/>
+        </td>
+    <tr>
+    </table>
+    </form>
+    </p>
+
+    <h2>How to use on your website</h2>
+    <pre>
+&lt;script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src='imgPreload.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+    $(function(){
+        $('img').imgPreload()
+    })
+&lt;/script&gt;
+    </pre>
+    Make sure each image to be preloaded has specified <i>width</i> and <i>height</i> attributes, otherwise the spinner will be displaced. <br/>
+    Put the spinner image (spinner.gif) in the same directory as the document, alternatively specify your own spinner/location using the <i>spinner_src</i> option.
+
+    <h2>Plugin Options</h2>
+    spinner_src – Either a relative path to the spinner or the absolute URL (default: 'spinner.gif')<br/>
+    fake_delay – pretend images take longer to load, value in ms (default: 10)<br/>
+    animation_duration – the duration of the fade in animation, value in ms (default: 1000)
+    <p>
+    Options Example
+    <pre>
+$('img').imgPreload({spinner_src: '/img/loader.gif', fake_delay: 100, animation_duration: 200})</pre>
+    </p>
+
+
+
+
+    <h2>License</h2>
+    <p>This pluign is Copylefted under <a href='http://www.gnu.org/licenses/lgpl-3.0.txt'>LGPLv3</a></p>
 
 
     <h2>Download</h2>
@@ -65,13 +171,20 @@
       by running:
       <pre>$ git clone git://github.com/denysonique/imgPreload</pre>
     </p>
+    <h2>Bugs</h2>
+        Please report bugs in the <a href='https://github.com/denysonique/imgPreload/issues'>Issues</a> section of the GitHub project page.
+    <h2>Thanks</h2>
+    <p>
+    To <a href='https://github.com/jashkenas'>Jeremy Ashkenas</a> for syntactically sweeting the development of this plugin via awesome <a href='http://coffeescript.org'>CoffeeScript</a>, and thanks to CoffeeScript <a href='https://github.com/jashkenas/coffee-script/contributors'>contributors</a> as well.
+    </p>
+    To <a href='http://www.ogkcreative.com/'>OGK Creative</a> for sponsoring the development of this plugin
 
+    <p>
+    You can obtain nice spinners from <a href='http://ajaxload.info'>http://ajaxload.info</a>
+    </p>
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/denysonique/imgPreload">denysonique/imgPreload</a>
     </div>
-
   </div>
-
-  
 </body>
 </html>
