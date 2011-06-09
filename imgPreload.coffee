@@ -2,7 +2,7 @@
     $.fn.imgPreload = (options)->
         
         settings =
-            fake_delay: 2000
+            fake_delay: 10
             animation_duration: 1000
             spinner_src: 'spinner.gif'
 

@@ -3,7 +3,7 @@
     return $.fn.imgPreload = function(options) {
       var delay_completion, i, image_stack, placeholder_stack, replace, settings, spinner_stack, src, x, _i, _len;
       settings = {
-        fake_delay: 2000,
+        fake_delay: 10,
         animation_duration: 1000,
         spinner_src: 'spinner.gif'
       };
