@@ -1,1 +1,1 @@
-Website & Demo: http://github.com/denysonique/imgPreload
+Demo & Documentation: http://github.com/denysonique/imgPreload
